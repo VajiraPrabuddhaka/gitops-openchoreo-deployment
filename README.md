@@ -11,14 +11,14 @@ GitOps repository for deploying OpenChoreo platform to k3d using Flux CD.
 
 1. k3d cluster created with port mappings:
 
-    > [!IMPORTANT]
-    > If you're using Colima, set the `K3D_FIX_DNS=0` environment variable when creating clusters.
-    > See [k3d-io/k3d#1449](https://github.com/k3d-io/k3d/issues/1449) for more details.
-    > Example: `export K3D_FIX_DNS=0`
-   
-    ```bash
-    curl -s https://raw.githubusercontent.com/openchoreo/openchoreo/main/install/k3d/single-cluster/config.yaml | k3d cluster create --config=-
-    ```
+ > [!IMPORTANT]
+ > If you're using Colima, set the `K3D_FIX_DNS=0` environment variable when creating clusters.
+ > See [k3d-io/k3d#1449](https://github.com/k3d-io/k3d/issues/1449) for more details.
+ > Example: `export K3D_FIX_DNS=0`
+
+ ```bash
+ curl -s https://raw.githubusercontent.com/openchoreo/openchoreo/main/install/k3d/single-cluster/config.yaml | k3d cluster create --config=-
+ ```
 
 2. kubectl
 
