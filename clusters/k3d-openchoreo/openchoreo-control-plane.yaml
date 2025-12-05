@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openchoreo-control-plane
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: openchoreo-control-plane
+  namespace: openchoreo-control-plane
+spec:
+  interval: 10m
+  timeout: 15m
+  chart:
+    spec:
+      chart: openchoreo-control-plane
+      version: 0.0.0-latest-dev
+      sourceRef:
+        kind: HelmRepository
+        name: openchoreo
+        namespace: openchoreo-control-plane
+  install:
+    disableWait: true
+    createNamespace: true
+    disableHooks: false
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  valuesFrom:
+    - kind: ConfigMap
+      name: openchoreo-control-plane-values
+      valuesKey: values-cp.yaml

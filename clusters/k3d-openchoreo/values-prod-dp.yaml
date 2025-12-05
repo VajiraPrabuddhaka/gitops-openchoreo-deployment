@@ -1,0 +1,24 @@
+cert-manager:
+  enabled: false
+
+gateway:
+  enabled: true
+  httpPort: 9080
+  httpsPort: 9443
+  envoy:
+    enabled: true
+    mountTmpVolume: true
+
+clusterAgent:
+  enabled: true
+  serverUrl: wss://cluster-gateway.openchoreo-control-plane.svc.cluster.local:8443/ws
+  planeName: prod
+  planeType: dataplane
+
+fakeSecretStore:
+  enabled: false
+
+external-secrets:
+  scopedRBAC: true
+  scopedNamespace: non-prod-dataplane
+  installCRDs: false
