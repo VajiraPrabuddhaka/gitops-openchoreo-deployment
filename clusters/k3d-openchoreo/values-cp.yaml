@@ -2,6 +2,9 @@ global:
   defaultResources:
     enabled: false
 
+cert-manager:
+  enabled: false
+
 security:
   oidc:
     authorizationUrl: http://thunder.openchoreo.localhost:8080/oauth2/authorize
