@@ -4,8 +4,9 @@ GitOps repository for deploying OpenChoreo platform to k3d using Flux CD.
 
 ## Components
 
+- **Cert-Manager**: Certificate management for Kubernetes (dependency)
 - **Control Plane**: Core OpenChoreo control plane with Backstage UI
-- **Data Plane**: Runtime environment for applications
+- **Data Planes**: Runtime environments for applications (non-prod and prod)
 
 ## Prerequisites
 
@@ -46,11 +47,13 @@ kubectl apply -k clusters/k3d-openchoreo/
 kubectl get helmreleases -A
 
 # Check pods
+kubectl get pods -n cert-manager
 kubectl get pods -n openchoreo-control-plane
 kubectl get pods -n non-prod-dataplane
 kubectl get pods -n prod-dataplane
 
 # Check ConfigMaps were generated from values files
+kubectl get configmap cert-manager-values -n cert-manager
 kubectl get configmap openchoreo-control-plane-values -n openchoreo-control-plane
 kubectl get configmap non-prod-dataplane-values -n non-prod-dataplane
 kubectl get configmap prod-dataplane-values -n prod-dataplane
@@ -68,7 +71,7 @@ After all components are deployed, you may need to register the data planes:
 
 ```bash
 # Register data plane
-curl -s https://raw.githubusercontent.com/openchoreo/openchoreo/release-v0.6/install/add-data-plane.sh | bash -s -- --control-plane-context k3d-openchoreo --enable-agent --agent-ca-namespace openchoreo-control-plane
+curl -s https://raw.githubusercontent.com/openchoreo/openchoreo/main/install/add-data-plane.sh | bash -s -- --control-plane-context k3d-openchoreo --enable-agent --agent-ca-namespace openchoreo-control-plane
 ```
 
 ## Customization
