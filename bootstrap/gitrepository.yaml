@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: gitops-openchoreo-deployment
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/VajiraPrabuddhaka/gitops-openchoreo-deployment
+  ref:
+    branch: main

@@ -23,22 +23,42 @@ GitOps repository for deploying OpenChoreo platform to k3d using Flux CD.
 
 2. kubectl
 
-## Installation
+## Quick Start (GitOps)
+
+**Step 1: Install Flux** (if not already installed)
 
 ```bash
-# Install Flux components
 kubectl apply -f https://github.com/fluxcd/flux2/releases/latest/download/install.yaml
 
 # Wait for Flux to be ready
 kubectl wait --for=condition=ready --timeout=5m pod -l app=source-controller -n flux-system
 kubectl wait --for=condition=ready --timeout=5m pod -l app=kustomize-controller -n flux-system
 kubectl wait --for=condition=ready --timeout=5m pod -l app=helm-controller -n flux-system
+```
 
-# Apply the manifests (from your local git clone)
+**Step 2: Apply GitOps bootstrap resources**
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/VajiraPrabuddhaka/gitops-openchoreo-deployment/main/bootstrap/gitrepository.yaml
+kubectl apply -f https://raw.githubusercontent.com/VajiraPrabuddhaka/gitops-openchoreo-deployment/main/bootstrap/kustomization-k3d-openchoreo.yaml
+```
+
+That's it! Flux will now automatically sync and deploy all OpenChoreo components from this repository.
+
+### Alternative: Manual Installation
+
+If you prefer to apply manifests directly without GitOps sync:
+
+```bash
+# Clone the repository
+git clone https://github.com/openchoreo/gitops-openchoreo-deployment.git
+cd gitops-openchoreo-deployment
+
+# Apply the manifests
 kubectl apply -k clusters/k3d-openchoreo/
 ```
 
-**Note**: To apply changes after editing values files, run `kubectl apply -k clusters/k3d-openchoreo/` again.
+**Note**: With manual installation, you need to run `kubectl apply -k clusters/k3d-openchoreo/` again after any changes.
 
 ## Verify Deployment
 
@@ -95,22 +115,29 @@ No need to edit multiple files - just update the values YAML and apply!
 ```
 gitops-openchoreo-deployment/
 ├── README.md
+├── bootstrap/                                   # GitOps bootstrap resources
+│   ├── gitrepository.yaml                       # Flux GitRepository (points to this repo)
+│   └── kustomization-k3d-openchoreo.yaml        # Flux Kustomization (deploys cluster config)
 └── clusters/
     └── k3d-openchoreo/
-        ├── kustomization.yaml                 # Kustomize config (generates ConfigMaps)
-        ├── openchoreo-helm-repo.yaml          # OpenChoreo Helm repository
-        ├── cert-manager-repo.yaml             # Cert-manager Helm repository
-        ├── cert-manager.yaml                  # Cert-manager HelmRelease
-        ├── openchoreo-control-plane.yaml      # Control plane HelmRelease
-        ├── non-prod-dataplane.yaml            # Non-prod data plane HelmRelease
-        ├── prod-dataplane.yaml                # Prod data plane HelmRelease
-        ├── values-cert-manager.yaml           # Cert-manager values
-        ├── values-cp.yaml                     # Control plane values
-        ├── values-non-prod-dp.yaml            # Non-prod data plane values
-        └── values-prod-dp.yaml                # Prod data plane values
+        ├── kustomization.yaml                   # Kustomize config (generates ConfigMaps)
+        ├── openchoreo-helm-repo.yaml            # OpenChoreo Helm repository
+        ├── cert-manager-repo.yaml               # Cert-manager Helm repository
+        ├── cert-manager.yaml                    # Cert-manager HelmRelease
+        ├── openchoreo-control-plane.yaml        # Control plane HelmRelease
+        ├── non-prod-dataplane.yaml              # Non-prod data plane HelmRelease
+        ├── prod-dataplane.yaml                  # Prod data plane HelmRelease
+        ├── values-cert-manager.yaml             # Cert-manager values
+        ├── values-cp.yaml                       # Control plane values
+        ├── values-non-prod-dp.yaml              # Non-prod data plane values
+        └── values-prod-dp.yaml                  # Prod data plane values
 ```
 
-**How it works**: The `kustomization.yaml` automatically generates ConfigMaps from the `values-*.yaml` files. Each HelmRelease references its ConfigMap via `valuesFrom`.
+**How it works**:
+1. The bootstrap resources create a Flux GitRepository and Kustomization that point to this repo
+2. Flux automatically syncs and applies the `clusters/k3d-openchoreo/` path
+3. The `kustomization.yaml` generates ConfigMaps from the `values-*.yaml` files
+4. Each HelmRelease references its ConfigMap via `valuesFrom`
 
 ## Troubleshooting
 

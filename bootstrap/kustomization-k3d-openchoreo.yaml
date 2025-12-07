@@ -1,0 +1,14 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: k3d-openchoreo
+  namespace: flux-system
+spec:
+  interval: 10m
+  sourceRef:
+    kind: GitRepository
+    name: gitops-openchoreo-deployment
+  path: ./clusters/k3d-openchoreo
+  prune: true
+  wait: false
+  timeout: 5m
