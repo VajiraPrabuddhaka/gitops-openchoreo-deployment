@@ -48,3 +48,9 @@ spec:
                 value:
                   name: CLUSTER_GATEWAY_URL
                   value: "https://cluster-gateway.openchoreo-control-plane.svc.cluster.local:8443"
+              - op: replace
+                path: /spec/template/spec/containers/0/args/3
+                value: "--cluster-gateway-url=https://cluster-gateway.openchoreo-control-plane.svc.cluster.local:8443"
+              - op: replace
+                path: /spec/template/spec/containers/0/args/4
+                value: "--cluster-gateway-ca-cert=/etc/cluster-gateway/ca.crt"
