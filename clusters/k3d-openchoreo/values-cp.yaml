@@ -11,21 +11,6 @@ security:
 
 clusterGateway:
   enabled: true
-  tls:
-    enabled: true
-    secretName: cluster-gateway-tls
-    issuerRef:
-      kind: Issuer
-      name: cluster-gateway-selfsigned-issuer
-    dnsNames:
-      - cluster-gateway.openchoreo-control-plane.svc
-      - cluster-gateway.openchoreo-control-plane.svc.cluster.local
-    duration: 2160h
-    renewBefore: 360h
-
-controllerManager:
-  clusterGateway:
-    enabled: true
 
 openchoreoApi:
   ingress:
