@@ -26,7 +26,8 @@ spec:
   install:
     disableWait: true
     createNamespace: true
-    disableHooks: false
+    disableHooks: true
+    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
