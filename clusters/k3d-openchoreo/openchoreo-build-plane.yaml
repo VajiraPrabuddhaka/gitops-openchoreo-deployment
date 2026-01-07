@@ -22,7 +22,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: openchoreo
-        namespace: openchoreo-build-plane
+        namespace: openchoreo-control-plane
   install:
     disableWait: true
     createNamespace: true
