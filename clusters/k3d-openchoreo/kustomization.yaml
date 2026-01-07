@@ -6,6 +6,7 @@ resources:
   - cert-manager-repo.yaml
   - cert-manager.yaml
   - openchoreo-control-plane.yaml
+  - openchoreo-build-plane.yaml
   - non-prod-dataplane.yaml
   - prod-dataplane.yaml
 
@@ -18,6 +19,10 @@ configMapGenerator:
     namespace: openchoreo-control-plane
     files:
       - values-cp.yaml
+  - name: openchoreo-build-plane-values
+    namespace: openchoreo-build-plane
+    files:
+      - values-bp.yaml
   - name: non-prod-dataplane-values
     namespace: non-prod-dataplane
     files:
