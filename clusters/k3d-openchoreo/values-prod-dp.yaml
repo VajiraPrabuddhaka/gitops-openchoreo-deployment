@@ -19,3 +19,6 @@ gatewayController:
 # External Secrets Operator configuration
 external-secrets:
   enabled: false
+
+clusterAgent:
+  planeID: non-prod
