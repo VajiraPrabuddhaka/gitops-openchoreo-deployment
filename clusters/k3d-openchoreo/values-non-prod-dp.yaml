@@ -1,23 +1,21 @@
-cert-manager:
-  enabled: false
+# Helm values for OpenChoreo Data Plane in k3d non-prod dataplane setup
 
+# Gateway configuration for non-prod dataplane setup
 gateway:
-  enabled: true
-  httpPort: 7080
-  httpsPort: 7443
+  httpPort: 19080
+  httpsPort: 19443
+  # Use self-signed issuer in control plane for TLS certs
+  selfSignedIssuer:
+    enabled: false
   envoy:
-    enabled: true
+    # Mount /tmp as emptyDir to fix Envoy temp file issues on macOS Docker/Colima
+    # Ref: https://github.com/kgateway-dev/kgateway/issues/9800
     mountTmpVolume: true
 
-clusterAgent:
-  enabled: true
-  serverUrl: wss://cluster-gateway.openchoreo-control-plane.svc.cluster.local:8443/ws
-  planeName: non-prod
-  planeType: dataplane
-
-external-secrets:
-  scopedRBAC: true
-  scopedNamespace: non-prod-dataplane
-
-fakeSecretStore:
+# Reuse the existing control plane's cluster gateway controller
+gatewayController:
   enabled: false
+
+# External Secrets Operator configuration
+external-secrets:
+  enabled: true
