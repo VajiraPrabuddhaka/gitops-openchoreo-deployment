@@ -28,7 +28,7 @@ thunder:
 gateway:
   enabled: true
   tls:
-    secretName: control-plane-gateway-tls
+    certName: control-plane-gateway-tls
 
   # Envoy - enabled by default for traffic routing
   envoy:
