@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: registry
+  namespace: openchoreo-build-plane
+spec:
+  interval: 10m
+  timeout: 10m
+  chart:
+    spec:
+      chart: docker-registry
+      sourceRef:
+        kind: HelmRepository
+        name: docker-registry
+        namespace: openchoreo-build-plane
+  install:
+    createNamespace: true
+    disableHooks: false
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  valuesFrom:
+    - kind: ConfigMap
+      name: docker-registry-values
+      valuesKey: values-docker-registry.yaml

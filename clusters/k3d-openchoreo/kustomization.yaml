@@ -8,6 +8,7 @@ resources:
   - openchoreo-control-plane.yaml
   - openchoreo-build-plane.yaml
   - openchoreo-data-plane.yaml
+  - openchoreo-docker-registry.yaml
 
 configMapGenerator:
   - name: openchoreo-control-plane-values
