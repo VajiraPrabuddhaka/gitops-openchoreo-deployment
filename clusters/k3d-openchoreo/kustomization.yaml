@@ -7,8 +7,7 @@ resources:
   - openchoreo-certs.yaml
   - openchoreo-control-plane.yaml
   - openchoreo-build-plane.yaml
-  - non-prod-dataplane.yaml
-  - prod-dataplane.yaml
+  - openchoreo-data-plane.yaml
 
 configMapGenerator:
   - name: openchoreo-control-plane-values
@@ -19,14 +18,10 @@ configMapGenerator:
     namespace: openchoreo-build-plane
     files:
       - values-bp.yaml
-  - name: non-prod-dataplane-values
-    namespace: non-prod-dataplane
+  - name: dataplane-values
+    namespace: openchoreo-data-plane
     files:
-      - values-non-prod-dp.yaml
-  - name: prod-dataplane-values
-    namespace: prod-dataplane
-    files:
-      - values-prod-dp.yaml
+      - values-dp.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

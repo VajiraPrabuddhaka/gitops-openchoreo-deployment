@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - cp-gateway-tls.yaml
+  - dp-gateway-tls.yaml

@@ -5,6 +5,8 @@ global:
   baseDomain: openchoreo.localhost
   # Port suffix for URLs (k3d maps host:8080 -> container:80)
   port: ":8080"
+  defaultResources:
+    enabled: true
 
 # Enable cluster gateway for agent-based data plane communication
 clusterGateway:
@@ -26,9 +28,8 @@ thunder:
       scheme: "http"
 
 gateway:
+  # Enable gateway
   enabled: true
-  tls:
-    certName: control-plane-gateway-tls
 
   # Envoy - enabled by default for traffic routing
   envoy:

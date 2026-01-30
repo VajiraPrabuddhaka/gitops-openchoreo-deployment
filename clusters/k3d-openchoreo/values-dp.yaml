@@ -1,9 +1,9 @@
-# Helm values for OpenChoreo Data Plane in k3d prod dataplane setup
+# Helm values for OpenChoreo Data Plane in k3d single-cluster setup
 
-# Gateway configuration for prod dataplane setup
+# Gateway configuration for single-cluster setup
 gateway:
-  httpPort: 19081
-  httpsPort: 19444
+  httpPort: 19080
+  httpsPort: 19443
   # Use self-signed issuer in control plane for TLS certs
   selfSignedIssuer:
     enabled: false
@@ -18,7 +18,4 @@ gatewayController:
 
 # External Secrets Operator configuration
 external-secrets:
-  enabled: false
-
-clusterAgent:
-  planeID: non-prod
+  enabled: true

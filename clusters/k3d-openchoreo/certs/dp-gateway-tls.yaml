@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: control-plane-tls
-  namespace: openchoreo-control-plane
+  name: openchoreo-gateway-tls
+  namespace: openchoreo-data-plane
 spec:
-  secretName: control-plane-tls
+  secretName: openchoreo-gateway-tls
   issuerRef:
     name: openchoreo-selfsigned-issuer
     kind: ClusterIssuer
   dnsNames:
-    - "*.openchoreo.localhost"
+    - "*.openchoreoapis.localhost"
