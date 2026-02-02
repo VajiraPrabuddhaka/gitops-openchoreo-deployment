@@ -32,6 +32,25 @@ spec:
   upgrade:
     remediation:
       retries: 3
+  # Temporary patch: remove TLS volumes/args from cluster agent when tls.enabled=false
+  # Remove once the chart properly conditions these on clusterAgent.tls.enabled
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: cluster-agent-dataplane
+            patch: |
+              - op: remove
+                path: /spec/template/spec/volumes
+              - op: remove
+                path: /spec/template/spec/containers/0/volumeMounts
+              - op: remove
+                path: /spec/template/spec/containers/0/args/5
+              - op: remove
+                path: /spec/template/spec/containers/0/args/4
+              - op: remove
+                path: /spec/template/spec/containers/0/args/3
   valuesFrom:
     - kind: ConfigMap
       name: dataplane-values
