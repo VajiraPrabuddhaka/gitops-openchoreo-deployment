@@ -34,6 +34,18 @@ spec:
   upgrade:
     remediation:
       retries: 3
+  # Temporary patch: add --skip-client-cert-verify to cluster-gateway for non-mTLS single-cluster setup
+  # Remove once the chart supports this via values
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: cluster-gateway
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/args/-
+                value: "--skip-client-cert-verify=true"
   valuesFrom:
     - kind: ConfigMap
       name: openchoreo-control-plane-values
