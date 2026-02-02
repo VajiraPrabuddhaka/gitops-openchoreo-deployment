@@ -11,6 +11,9 @@ global:
 # Enable cluster gateway for agent-based data plane communication
 clusterGateway:
   enabled: true
+  image:
+    tag: tls-fix
+    pullPolicy: Never
 
 # Controller Manager cluster gateway configuration
 # Enables controllers to communicate with data/build planes via cluster gateway

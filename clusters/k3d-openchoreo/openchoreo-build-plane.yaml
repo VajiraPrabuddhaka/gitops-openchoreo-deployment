@@ -52,6 +52,9 @@ spec:
                 path: /spec/template/spec/containers/0/args/4
               - op: remove
                 path: /spec/template/spec/containers/0/args/3
+              - op: add
+                path: /spec/template/spec/containers/0/args/3
+                value: "--tls-enabled=false"
   valuesFrom:
     - kind: ConfigMap
       name: openchoreo-build-plane-values
