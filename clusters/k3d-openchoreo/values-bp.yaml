@@ -27,3 +27,8 @@ external-secrets:
 # including openchoreo-build-plane and openchoreo-ci-* (Argo Workflows build jobs).
 fluent-bit:
   enabled: false
+
+# disabling TLS for cluster agent
+clusterAgent:
+  tls:
+    enabled: false

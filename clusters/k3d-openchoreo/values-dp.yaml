@@ -19,3 +19,8 @@ gatewayController:
 # External Secrets Operator configuration
 external-secrets:
   enabled: true
+
+# Disable TLS for cluster agent
+clusterAgent:
+  tls:
+    enabled: false
