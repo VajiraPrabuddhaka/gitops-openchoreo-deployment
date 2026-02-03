@@ -30,8 +30,5 @@ fluent-bit:
 
 # disabling TLS for cluster agent
 clusterAgent:
-  image:
-    tag: tls-fix
-    pullPolicy: Never
   tls:
     enabled: false
