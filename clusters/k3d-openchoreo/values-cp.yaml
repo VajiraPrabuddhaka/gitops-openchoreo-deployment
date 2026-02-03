@@ -9,6 +9,8 @@ global:
 # Enable cluster gateway for agent-based data plane communication
 clusterGateway:
   enabled: true
+  tls:
+    skipClientCertVerify: true
 
 # Controller Manager cluster gateway configuration
 # Enables controllers to communicate with data/build planes via cluster gateway
