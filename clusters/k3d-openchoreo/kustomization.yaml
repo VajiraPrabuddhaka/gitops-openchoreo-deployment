@@ -5,6 +5,7 @@ resources:
   - openchoreo-helm-repo.yaml
   - openchoreo-cert-manager.yaml
   - openchoreo-certs.yaml
+  - openchoreo-gateway-api.yaml
   - openchoreo-control-plane.yaml
   - openchoreo-build-plane.yaml
   - openchoreo-data-plane.yaml
