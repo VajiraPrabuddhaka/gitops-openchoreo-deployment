@@ -9,6 +9,7 @@ resources:
   - openchoreo-build-plane.yaml
   - openchoreo-data-plane.yaml
   - openchoreo-docker-registry.yaml
+  - openchoreo-external-secrets.yaml
 
 configMapGenerator:
   - name: openchoreo-control-plane-values
