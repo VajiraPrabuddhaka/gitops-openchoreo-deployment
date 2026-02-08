@@ -28,3 +28,8 @@ fluent-bit:
 clusterAgent:
   tls:
     enabled: false
+
+openbao:
+  server:
+    dev:
+      enabled: true
